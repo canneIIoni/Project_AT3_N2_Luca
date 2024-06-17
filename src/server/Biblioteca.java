@@ -54,4 +54,26 @@ public class Biblioteca {
     public synchronized List<Livro> listarLivros() {
         return livros;
     }
+
+    public synchronized boolean alugarLivro(String titulo) {
+        for (Livro livro : livros) {
+            if (livro.getTitulo().equalsIgnoreCase(titulo) && livro.getExemplares() > 0) {
+                livro.setExemplares(livro.getExemplares() - 1);
+                salvarLivros();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public synchronized boolean devolverLivro(String titulo) {
+        for (Livro livro : livros) {
+            if (livro.getTitulo().equalsIgnoreCase(titulo)) {
+                livro.setExemplares(livro.getExemplares() + 1);
+                salvarLivros();
+                return true;
+            }
+        }
+        return false;
+    }
 }
