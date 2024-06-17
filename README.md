@@ -13,6 +13,7 @@ Livro: Representa um livro da biblioteca com atributos como título, autor, gên
 **server**
 
 Biblioteca: Contém a lista de livros e métodos para manipulação dos livros (listar, alugar, devolver, cadastrar).
+
 ServerBiblioteca: Implementa o servidor que se comunica com os clientes e manipula os dados da biblioteca.
 
 **client**
@@ -23,7 +24,8 @@ ClientBiblioteca: Implementa o cliente que se comunica com o servidor para reali
 
 O servidor de biblioteca suporta as seguintes operações:
 
-Listagem dos livros
-Aluguel de livros
-Devolução de livros
-Cadastro de livros
+1 - Listar livros
+2 - Alugar livro
+3 - Devolver livro
+4 - Cadastrar novo livro
+5 - Sair
