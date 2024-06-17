@@ -1,6 +1,8 @@
 package model;
 
-public class Livro {
+import java.io.Serializable;
+
+public class Livro implements Serializable {
     private String titulo;
     private String autor;
     private String genero;
@@ -13,7 +15,7 @@ public class Livro {
         this.exemplares = exemplares;
     }
 
-    // Getters e Setters
+    // Getters e Setters (mantidos como antes)
 
     public String getTitulo() {
         return titulo;
@@ -49,12 +51,8 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livro{" +
-                "titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", genero='" + genero + '\'' +
-                ", exemplares=" + exemplares +
-                '}';
+        return String.format("%s, %s, %s, exemplares: %d",
+                titulo, autor, genero, exemplares);
     }
 
     public static Livro fromJson(String json) {
