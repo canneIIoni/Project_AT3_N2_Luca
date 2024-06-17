@@ -56,4 +56,18 @@ public class Livro {
                 ", exemplares=" + exemplares +
                 '}';
     }
+
+    public String toJson() {
+        return String.format("{\"titulo\": \"%s\", \"autor\": \"%s\", \"genero\": \"%s\", \"exemplares\": %d}",
+                titulo, autor, genero, exemplares);
+    }
+
+    public static Livro fromJson(String json) {
+        String[] parts = json.split("\"");
+        String titulo = parts[3];
+        String autor = parts[7];
+        String genero = parts[11];
+        int exemplares = Integer.parseInt(parts[14].split(": ")[1]);
+        return new Livro(titulo, autor, genero, exemplares);
+    }
 }
