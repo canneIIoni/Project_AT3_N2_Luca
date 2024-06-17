@@ -23,7 +23,8 @@ ClientBiblioteca: Implementa o cliente que se comunica com o servidor para reali
 
 O servidor de biblioteca suporta as seguintes operações:
 
-Listagem dos livros
-Aluguel de livros
-Devolução de livros
-Cadastro de livros
+1 - Listar livros
+2 - Alugar livro
+3 - Devolver livro
+4 - Cadastrar novo livro
+5 - Sair
