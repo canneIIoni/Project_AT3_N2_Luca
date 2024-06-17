@@ -19,29 +19,33 @@ public class ServerBiblioteca {
                 System.out.println("Cliente conectado: " + socket.getInetAddress().getHostAddress());
 
                 new Thread(() -> {
-                    try (ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())) {
+                    try (ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream())) {
 
                         String comando = (String) ois.readObject();
                         switch (comando) {
                             case "listar":
                                 List<Livro> listaLivros = biblioteca.listarLivros();
                                 oos.writeObject(listaLivros);
+                                oos.flush(); // Ensure all data is sent before closing
                                 break;
                             case "alugar":
                                 String tituloAlugar = (String) ois.readObject();
                                 boolean alugado = biblioteca.alugarLivro(tituloAlugar);
                                 oos.writeObject(alugado);
+                                oos.flush();
                                 break;
                             case "devolver":
                                 String tituloDevolver = (String) ois.readObject();
                                 boolean devolvido = biblioteca.devolverLivro(tituloDevolver);
                                 oos.writeObject(devolvido);
+                                oos.flush();
                                 break;
                             case "cadastrar":
                                 Livro novoLivro = (Livro) ois.readObject();
                                 boolean cadastrado = biblioteca.cadastrarLivro(novoLivro);
                                 oos.writeObject(cadastrado);
+                                oos.flush();
                                 break;
                             default:
                                 System.out.println("Comando inválido: " + comando);
