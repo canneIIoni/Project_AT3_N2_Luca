@@ -36,6 +36,21 @@ public class Biblioteca {
         return livros;
     }
 
+    private void salvarLivros() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            bw.write("{\"livros\": [");
+            for (int i = 0; i < livros.size(); i++) {
+                bw.write(livros.get(i).toJson());
+                if (i < livros.size() - 1) {
+                    bw.write(",");
+                }
+            }
+            bw.write("]}");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public synchronized List<Livro> listarLivros() {
         return livros;
     }
