@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Biblioteca {
     private List<Livro> livros;
-    private final String filePath = "livros.json";
+    private final String filePath = "src/server/livros.json";
 
     public Biblioteca() {
         this.livros = carregarLivros();
@@ -75,5 +75,14 @@ public class Biblioteca {
             }
         }
         return false;
+    }
+
+    public synchronized boolean cadastrarLivro(Livro novoLivro) {
+        if (livros.stream().anyMatch(livro -> livro.getTitulo().equalsIgnoreCase(novoLivro.getTitulo()))) {
+            return false; // Livro já cadastrado
+        }
+        livros.add(novoLivro);
+        salvarLivros();
+        return true;
     }
 }

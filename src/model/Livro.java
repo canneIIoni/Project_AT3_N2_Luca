@@ -57,17 +57,32 @@ public class Livro {
                 '}';
     }
 
+    public static Livro fromJson(String json) {
+        // Remover espaços em branco extras
+        json = json.trim();
+
+        // Encontrar os índices dos valores
+        int startIndex = json.indexOf("\"titulo\": \"") + "\"titulo\": \"".length();
+        int endIndex = json.indexOf("\",", startIndex);
+        String titulo = json.substring(startIndex, endIndex);
+
+        startIndex = json.indexOf("\"autor\": \"") + "\"autor\": \"".length();
+        endIndex = json.indexOf("\",", startIndex);
+        String autor = json.substring(startIndex, endIndex);
+
+        startIndex = json.indexOf("\"genero\": \"") + "\"genero\": \"".length();
+        endIndex = json.indexOf("\",", startIndex);
+        String genero = json.substring(startIndex, endIndex);
+
+        startIndex = json.indexOf("\"exemplares\": ") + "\"exemplares\": ".length();
+        endIndex = json.indexOf("}", startIndex);
+        int exemplares = Integer.parseInt(json.substring(startIndex, endIndex).trim());
+
+        return new Livro(titulo, autor, genero, exemplares);
+    }
+
     public String toJson() {
         return String.format("{\"titulo\": \"%s\", \"autor\": \"%s\", \"genero\": \"%s\", \"exemplares\": %d}",
                 titulo, autor, genero, exemplares);
-    }
-
-    public static Livro fromJson(String json) {
-        String[] parts = json.split("\"");
-        String titulo = parts[3];
-        String autor = parts[7];
-        String genero = parts[11];
-        int exemplares = Integer.parseInt(parts[14].split(": ")[1]);
-        return new Livro(titulo, autor, genero, exemplares);
     }
 }
